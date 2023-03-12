@@ -7,11 +7,15 @@ using StarterAssets;
 public class ThridPersonShooterController : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
+    [SerializeField] private float normalSensitivity;
+    [SerializeField] private float aimSensitivity;
 
+    private ThirdPersonController thirdPersonController;
     private StarterAssetsInputs starterAssetsInputs;
 
     private void Awake()
     {
+        thirdPersonController= GetComponent<ThirdPersonController>();
         starterAssetsInputs= GetComponent<StarterAssetsInputs>();
     }
 
@@ -20,10 +24,12 @@ public class ThridPersonShooterController : MonoBehaviour
         if (starterAssetsInputs.aim)
         {
             aimVirtualCamera.gameObject.SetActive(true);
+            thirdPersonController.SetSensitivity(aimSensitivity);
         }
         else
         {
             aimVirtualCamera.gameObject.SetActive(false);
+            thirdPersonController.SetSensitivity(normalSensitivity);
         }
     }
 }
